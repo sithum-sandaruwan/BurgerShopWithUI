@@ -3,9 +3,8 @@ package model;
 public class OrderList {
     private Node first;
 
-    public void add(String pNum, String name) {
-        Node node;
-        node = new Node(new Order(pNum, name));
+    public void add(String customerID, String customerName, String orderID, int qty, int totalValue, int orderStatus) {
+        Node node = new Node(new Order(customerID, customerName, orderID, qty, totalValue, orderStatus));
 
         if(first == null) {
             first = node;
@@ -18,8 +17,8 @@ public class OrderList {
         }
     }
 
-    public void add(int orderID, int qty, int totalValue, int orderStatus) {
-        Node node = new Node(new Order(orderID, qty, totalValue, orderStatus));
+    public void add(Order order) {
+        Node node = new Node(order);
 
         if(first == null) {
             first = node;
@@ -149,7 +148,19 @@ public class OrderList {
         System.out.println(toString());
     }
 
-    class Node {
+    public Order[] toArray() {
+        Order[] orderArray = new Order[size()];
+
+        Node temp = first;
+        for(int i = 0; temp != null; i++) {
+            orderArray[i] = temp.order;
+            temp = temp.next;
+        }
+        return orderArray;
+    }
+
+    //----------Inner Class----------
+    private class Node {
         private Order order;
         private Node next;
 
@@ -160,4 +171,5 @@ public class OrderList {
             this.next = null;
         }
     }
+    //-------------------------------
 }

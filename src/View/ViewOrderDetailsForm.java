@@ -41,11 +41,10 @@ public class ViewOrderDetailsForm extends JFrame {
         add(paneTbl);
         add(lblTitle);
     }
-    private void loadTable(){
-
-        //Order [] ordersArr = OrderController.toArray();
-
-        //Thawa tynwa me method eke hadanna
-
-    }
+//    private void loadTable(){
+//        Order [] ordersArr = OrderController.toArray();
+//
+//        //Thawa tynwa me method eke hadanna
+//
+//    }
 }

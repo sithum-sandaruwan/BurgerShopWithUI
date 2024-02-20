@@ -1,4 +1,3 @@
-
 package View;
 
 import controller.OrderController;
@@ -11,25 +10,24 @@ import java.awt.Color;
 import java.awt.Font;
 
 public class AddOrder extends JFrame {
+    private JLabel lblHome;
+    private JLabel lblOrderId;
+    private JLabel lblCustomerId;
+    private JLabel lblCustomerName;
+    private JLabel lblQty;
+    private JLabel lblNetTotal;
+    private JLabel lblNetTotalValue;
 
-     private JLabel lblHome;
-     private JLabel lblOrderId;
-     private JLabel lblCustomerId;
-     private JLabel lblCustomerName;
-     private JLabel lblQty;
-     private JLabel lblNetTotal;
-     private JLabel lblNetTotalValue;
+    private JButton PlaceOrderBtn;
+    private JButton AddCustomerBtn;
+    private JButton AddTotalBtn;
 
-     private JButton PlaceOrderBtn;
-     private JButton AddCustomerBtn;
-     private JButton AddTotalBtn;
+    private JTextField txtOrderId;
+    private JTextField txtName;
+    private JTextField txtCustomerId;
+    private JTextField txtQty;
 
-     private JTextField txtOrderId;
-     private JTextField txtName;
-     private JTextField txtCustomerId;
-     private JTextField txtQty;
-
-     private int qty;
+    private int qty;
 
     public AddOrder(){
         setTitle("Burger Shop");
@@ -56,7 +54,6 @@ public class AddOrder extends JFrame {
         lblOrderId.setFont(lblFont);
         lblOrderId.setForeground(Color.BLACK);
         lblOrderId.setBounds(50,100,100,20);
-
 
         lblCustomerName = new JLabel();
         lblCustomerName .setText("Name or PH : ");
@@ -92,8 +89,7 @@ public class AddOrder extends JFrame {
         txtOrderId.setEditable(false);
         txtOrderId.setBounds(125,98, 100,25);
         txtOrderId.setBorder(null);
-        txtOrderId.setText(OrderController.generateOrderId());
-
+        txtOrderId.setText(OrderController.generateOrderID());
 
         txtName = new JTextField();
         txtName.setBounds(150,150, 150,25);
@@ -101,7 +97,7 @@ public class AddOrder extends JFrame {
         txtCustomerId = new JTextField();
         txtCustomerId.setBounds(150,200, 150,25);
         txtCustomerId.setEditable(false);
-        txtCustomerId.setText(OrderController.generateCustomerId());
+        txtCustomerId.setText(OrderController.generateCustomerID());
 
         txtQty = new JTextField();
         txtQty.setBounds(150,250, 150,25);
@@ -110,11 +106,11 @@ public class AddOrder extends JFrame {
         AddTotalBtn.setFont(lblFont);
         AddTotalBtn.setBackground(Color.GRAY);
         AddTotalBtn.setForeground(Color.BLACK);
-        AddTotalBtn.setBounds(300,200,50,25);
+        AddTotalBtn.setBounds(300,250,50,25);
         AddTotalBtn.setFocusable(false);
         AddTotalBtn.addActionListener(evt ->{
             qty = Integer.parseInt(txtQty.getText());
-            qty*=OrderController.burgerPrice;
+            qty *= OrderController.BURGERPRICE;
             lblNetTotalValue.setText(qty+"/=");
         });
 
@@ -127,19 +123,20 @@ public class AddOrder extends JFrame {
         PlaceOrderBtn.setFocusable(false);
         PlaceOrderBtn.addActionListener(evt -> {
             System.out.println("Order Placed");
-//            Order orderObj = new Order(
-//                    txtOrderId.getText(),
-//                    txtCustomerId.getText(),
-//                    txtName.getText(),
-//                    1,
-//                    Integer.parseInt(txtQty.getText()),
-//                    qty
-//
-//            );
-//            System.out.println(orderObj);
-     //       OrderController.add(orderObj);
-            //       clearTxt();
-           // setNextId();
+
+            Order orderObj = new Order(
+                    txtOrderId.getText(),
+                    txtCustomerId.getText(),
+                    txtName.getText(),
+                    1,
+                    Integer.parseInt(txtQty.getText()),
+                    qty
+            );
+
+            System.out.println(orderObj);
+            OrderController.addOrder(orderObj);
+            clearTxt();
+            setNextId();
         });
 
         add(lblCustomerName);
@@ -157,15 +154,16 @@ public class AddOrder extends JFrame {
 
         add(PlaceOrderBtn);
         add(AddTotalBtn);
-
     }
+
     private void clearTxt(){
         txtName.setText(null);
         txtQty.setText(null);
         lblNetTotalValue.setText("0");
     }
+
     private void setNextId(){
-        txtCustomerId.setText(OrderController.generateCustomerId());
-        txtOrderId.setText(OrderController.generateOrderId());
+        txtCustomerId.setText(OrderController.generateCustomerID());
+        txtOrderId.setText(OrderController.generateOrderID());
     }
 }
