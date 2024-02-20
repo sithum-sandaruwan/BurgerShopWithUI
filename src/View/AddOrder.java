@@ -1,60 +1,171 @@
 
 package View;
 
+import controller.OrderController;
+import model.Order;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 
 public class AddOrder extends JFrame {
 
-    JPanel panel1= new JPanel(new BorderLayout());
-    JPanel panel2= new JPanel(new BorderLayout());
-    JButton placeOrderB = new JButton();
-    JButton backHome = new JButton();
-    JButton cancel = new JButton();
-    JLabel NetTot = new JLabel();
-    JLabel BurgerQt = new JLabel();
-    JLabel OrderStat = new JLabel();
-    JTextField custId = new JTextField();
-    JTextField bQty = new JTextField();
-    JTextField NetTotValue = new JTextField();
-    AddOrder(){
+     private JLabel lblHome;
+     private JLabel lblOrderId;
+     private JLabel lblCustomerId;
+     private JLabel lblCustomerName;
+     private JLabel lblQty;
+     private JLabel lblNetTotal;
+     private JLabel lblNetTotalValue;
+
+     private JButton PlaceOrderBtn;
+     private JButton AddCustomerBtn;
+     private JButton AddTotalBtn;
+
+     private JTextField txtOrderId;
+     private JTextField txtName;
+     private JTextField txtCustomerId;
+     private JTextField txtQty;
+
+     private int qty;
+
+    public AddOrder(){
         setTitle("Burger Shop");
         setSize(600,400);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        getContentPane().setBackground(Color.WHITE);
+        setLayout(null);
+
+        Font lblFont = new Font("Times New Roman",Font.BOLD,15);
+
+        lblHome = new JLabel();
+        lblHome .setText("Place Order");
+        lblHome.setFont(new Font("Time New Roman",Font.BOLD,30));
+        lblHome.setForeground(Color.WHITE);
+        lblHome.setBounds(0,0,600,50);
+
+        lblHome.setHorizontalAlignment(JLabel.CENTER);
+        lblHome.setVerticalAlignment(JLabel.CENTER);
+        lblHome.setBackground(Color.RED);
+        lblHome.setOpaque(true);
+
+        lblOrderId = new JLabel();
+        lblOrderId .setText("Order Id : ");
+        lblOrderId.setFont(lblFont);
+        lblOrderId.setForeground(Color.BLACK);
+        lblOrderId.setBounds(50,100,100,20);
 
 
-        JLabel label1 = new JLabel("Place Order");
-        label1.setFont(new Font("Time New Roman",Font.BOLD,30));
-        label1.setHorizontalAlignment(JLabel.CENTER);
-        label1.setForeground(Color.WHITE);
-        label1.setBackground(Color.RED);
-        label1.setOpaque(true);
-        label1.setBorder(new EmptyBorder(5,10,5,10));
-        panel1.add(label1,BorderLayout.NORTH);
+        lblCustomerName = new JLabel();
+        lblCustomerName .setText("Name or PH : ");
+        lblCustomerName.setFont(lblFont);
+        lblCustomerName.setForeground(Color.BLACK);
+        lblCustomerName.setBounds(50,150,100,20);
 
-        // panel2.setLayout(new BoxLayout(panel2,BoxLayout.Y_AXIS));
+        lblCustomerId = new JLabel();
+        lblCustomerId .setText("Customer Id : ");
+        lblCustomerId.setFont(lblFont);
+        lblCustomerId.setForeground(Color.BLACK);
+        lblCustomerId.setBounds(50,200,100,20);
 
-        JLabel label2 = new JLabel("Order Id :");
-        label2.setFont(new Font("Verdana",Font.PLAIN,15));
-        label2.setHorizontalAlignment(JLabel.LEFT);
-        label2.setForeground(Color.BLACK);
-        panel2.add(label2,BorderLayout.NORTH);
+        lblQty = new JLabel();
+        lblQty .setText("Burger Qty : ");
+        lblQty.setFont(lblFont);
+        lblQty.setForeground(Color.BLACK);
+        lblQty.setBounds(50,250,100,20);
+
+        lblNetTotal = new JLabel();
+        lblNetTotal .setText("Net Total : ");
+        lblNetTotal.setFont(lblFont);
+        lblNetTotal.setForeground(Color.BLACK);
+        lblNetTotal.setBounds(50,300,100,20);
+
+        lblNetTotalValue = new JLabel();
+        lblNetTotalValue .setText(" 0 ");
+        lblNetTotalValue.setFont(lblFont);
+        lblNetTotalValue.setForeground(Color.RED);
+        lblNetTotalValue.setBounds(150,300,100,20);
+
+        txtOrderId = new JTextField("o0000");
+        txtOrderId.setEditable(false);
+        txtOrderId.setBounds(125,98, 100,25);
+        txtOrderId.setBorder(null);
+        txtOrderId.setText(OrderController.generateOrderId());
 
 
-        JLabel label3 = new JLabel("Customer Id :");
-        label3.setFont(new Font("Verdana",Font.PLAIN,15));
-        label3.setHorizontalAlignment(JLabel.LEFT);
-        label3.setForeground(Color.BLACK);
-        panel2.add(label3,BorderLayout.SOUTH);
+        txtName = new JTextField();
+        txtName.setBounds(150,150, 150,25);
 
-        panel2.add(Box.createRigidArea(new Dimension(0, 10)), BorderLayout.CENTER);
+        txtCustomerId = new JTextField();
+        txtCustomerId.setBounds(150,200, 150,25);
+        txtCustomerId.setEditable(false);
+        txtCustomerId.setText(OrderController.generateCustomerId());
 
-        panel1.add(panel2,BorderLayout.WEST);
-        add(panel1);
+        txtQty = new JTextField();
+        txtQty.setBounds(150,250, 150,25);
+
+        AddTotalBtn = new JButton("+");
+        AddTotalBtn.setFont(lblFont);
+        AddTotalBtn.setBackground(Color.GRAY);
+        AddTotalBtn.setForeground(Color.BLACK);
+        AddTotalBtn.setBounds(300,200,50,25);
+        AddTotalBtn.setFocusable(false);
+        AddTotalBtn.addActionListener(evt ->{
+            qty = Integer.parseInt(txtQty.getText());
+            qty*=OrderController.burgerPrice;
+            lblNetTotalValue.setText(qty+"/=");
+        });
+
+        PlaceOrderBtn = new JButton("Place Order");
+        PlaceOrderBtn.setFont(lblFont);
+        PlaceOrderBtn.setBackground(Color.RED);
+        PlaceOrderBtn.setForeground(Color.WHITE);
+        PlaceOrderBtn.setBounds(380,170,150,25);
+        PlaceOrderBtn.setBorderPainted(true);
+        PlaceOrderBtn.setFocusable(false);
+        PlaceOrderBtn.addActionListener(evt -> {
+            System.out.println("Order Placed");
+//            Order orderObj = new Order(
+//                    txtOrderId.getText(),
+//                    txtCustomerId.getText(),
+//                    txtName.getText(),
+//                    1,
+//                    Integer.parseInt(txtQty.getText()),
+//                    qty
+//
+//            );
+//            System.out.println(orderObj);
+     //       OrderController.add(orderObj);
+            //       clearTxt();
+           // setNextId();
+        });
+
+        add(lblCustomerName);
+        add(lblCustomerId);
+        add(lblOrderId);
+        add(lblQty);
+        add(lblNetTotal);
+        add(lblNetTotalValue);
+        add(lblHome);
+
+        add(txtOrderId);
+        add(txtName);
+        add(txtCustomerId);
+        add(txtQty);
+
+        add(PlaceOrderBtn);
+        add(AddTotalBtn);
 
     }
-
+    private void clearTxt(){
+        txtName.setText(null);
+        txtQty.setText(null);
+        lblNetTotalValue.setText("0");
+    }
+    private void setNextId(){
+        txtCustomerId.setText(OrderController.generateCustomerId());
+        txtOrderId.setText(OrderController.generateOrderId());
+    }
 }
