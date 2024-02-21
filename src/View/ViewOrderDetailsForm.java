@@ -40,11 +40,26 @@ public class ViewOrderDetailsForm extends JFrame {
 
         add(paneTbl);
         add(lblTitle);
+
+       // loadTable();
     }
 //    private void loadTable(){
 //        Order [] ordersArr = OrderController.toArray();
 //
-//        //Thawa tynwa me method eke hadanna
+//        dtm.setRowCount(0);
+//
+//        for (int i = 0; i < ordersArr.length; i++) {
+//            Order obj = ordersArr[i];
+//            Object[] rowdata ={
+//              obj.getOrderID(),
+//              obj.getCustomerID(),
+//              obj.getCustomerName(),
+//              obj.getOrderStatus(),
+//              obj.getQuantity(),
+//              obj.getTotalValue()
+//            };
+//            dtm.addRow(rowdata);
+//        }
 //
 //    }
 }
