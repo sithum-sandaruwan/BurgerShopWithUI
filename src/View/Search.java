@@ -2,9 +2,6 @@
 package View;
 
 
-import controller.OrderController;
-import model.Order;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -70,7 +67,7 @@ public class Search extends JFrame {
         btnSearchCust.setFocusable(false);
         btnSearchOrder.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         btnSearchCust.addActionListener(evt -> {
-            new SearchCust().setVisible(true);
+            new SearchCustForm().setVisible(true);
         });
 
 

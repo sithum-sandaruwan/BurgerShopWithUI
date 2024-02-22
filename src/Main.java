@@ -1,10 +1,7 @@
-import View.AddOrder;
-import View.HomePageForm;
-import View.Search;
-import View.SearchOrderForm;
+import View.*;
 
 public class Main {
     public static void main(String[] args) {
-        new SearchOrderForm().setVisible(true);
+        new SearchCustForm().setVisible(true);
     }
 }

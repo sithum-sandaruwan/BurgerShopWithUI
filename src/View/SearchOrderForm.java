@@ -1,15 +1,18 @@
 package View;
 
 import controller.OrderController;
+import model.Order;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class SearchOrderForm extends JFrame {
 
-        private JLabel lblTitle,lblOrderId,lblCustomerId,lblName,lblQty,lblTotal,lblOrderStatus,lblCustIdValue,lblNameValue,lblQtyValue,lblTotValue,lblStatusValue;
+    private final JButton SearchBtn;
+    private final JButton btnBack;
+    private JLabel lblTitle,lblOrderId,lblCustomerId,lblName,lblQty,lblTotal,lblOrderStatus;
 
-        private JTextField txtOrderId;
+        private JTextField txtOrderId,txtCustIdValue,txtNameValue,txtQtyValue,txtTotValue,txtStatusValue;
     public SearchOrderForm(){
 
         setTitle("Burger Shop");
@@ -66,41 +69,71 @@ public class SearchOrderForm extends JFrame {
         lblOrderStatus.setForeground(Color.BLACK);
         lblOrderStatus.setBounds(60,270,150,20);
 
-        lblCustIdValue = new JLabel();
-        lblCustIdValue .setText("Order Status : ");
-        lblCustIdValue.setFont(lblFont);
-        lblCustIdValue.setForeground(Color.BLACK);
-        lblCustIdValue.setBounds(60,270,150,20);
-
-        lblNameValue = new JLabel();
-        lblNameValue .setText("Order Status : ");
-        lblNameValue.setFont(lblFont);
-        lblNameValue.setForeground(Color.BLACK);
-        lblNameValue.setBounds(60,270,150,20);
-
-        lblQtyValue = new JLabel();
-        lblQtyValue .setText("Order Status : ");
-        lblQtyValue.setFont(lblFont);
-        lblQtyValue.setForeground(Color.BLACK);
-        lblQtyValue.setBounds(60,270,150,20);
-
-        lblTotValue = new JLabel();
-        lblTotValue .setText("Order Status : ");
-        lblTotValue.setFont(lblFont);
-        lblTotValue.setForeground(Color.BLACK);
-        lblTotValue.setBounds(60,270,150,20);
-
-        lblStatusValue = new JLabel();
-        lblStatusValue.setText("Order Status : ");
-        lblStatusValue.setFont(lblFont);
-        lblStatusValue.setForeground(Color.BLACK);
-        lblStatusValue.setBounds(60,270,150,20);
 
         txtOrderId = new JTextField();
         txtOrderId.setEditable(true);
         txtOrderId.setBounds(150,95, 100,25);
         txtOrderId.setBackground(Color.WHITE);
-        //txtOrderId.setBorder();
+        txtOrderId.setBorder(null);
+
+        txtCustIdValue = new JTextField();
+        txtCustIdValue.setEditable(false);
+        txtCustIdValue.setBounds(150,150, 100,20);
+        txtCustIdValue.setBorder(null);
+
+        txtNameValue = new JTextField();
+        txtNameValue.setEditable(false);
+        txtNameValue.setBounds(120,180, 100,20);
+        txtNameValue.setBorder(null);
+
+        txtQtyValue = new JTextField();
+        txtQtyValue.setEditable(false);
+        txtQtyValue.setBounds(120,210, 100,20);
+        txtQtyValue.setBorder(null);
+
+        txtTotValue = new JTextField();
+        txtTotValue.setEditable(false);
+        txtTotValue.setBounds(120,240, 100,20);
+        txtTotValue.setBorder(null);
+
+        txtStatusValue = new JTextField();
+        txtStatusValue.setEditable(false);
+        txtStatusValue.setBounds(160,270, 100,20);
+        txtStatusValue.setBorder(null);
+
+        SearchBtn = new JButton("Search");
+        SearchBtn.setFont(lblFont);
+        SearchBtn.setBackground(Color.RED);
+        SearchBtn.setForeground(Color.WHITE);
+        SearchBtn.setBounds(420,310,100,25);
+        SearchBtn.setBorderPainted(true);
+        SearchBtn.setFocusable(false);
+        SearchBtn.addActionListener(evt -> {
+
+
+                    Order orderObj = new Order();
+                            // txtOrderId.getText(),
+                            // txtCustomerId.getText(),
+                            // txtName.getText(),
+                            // 1,
+                            // Integer.parseInt(txtQty.getText()),
+                            // qty
+        });
+
+        btnBack = new JButton("Back");
+        btnBack.setFont(lblFont);
+        btnBack.setBackground(Color.GRAY);
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setBounds(295,310,100,25);
+        btnBack.setBorderPainted(true);
+        btnBack.setFocusable(false);
+        btnBack.addActionListener(evt -> {
+
+        });
+
+
+
+
 
 
         add(lblTitle);
@@ -111,12 +144,14 @@ public class SearchOrderForm extends JFrame {
         add(lblTotal);
         add(lblOrderStatus);
 
-        add(lblNameValue);
-        add(lblCustIdValue);
-        add(lblQtyValue);
-        add(lblStatusValue);
-        add(lblTotValue);
-
+        add(txtNameValue);
+        add(txtCustIdValue);
+        add(txtStatusValue);
+        add(txtQtyValue);
+        add(txtTotValue);
         add(txtOrderId);
+
+        add(SearchBtn);
+        add(btnBack);
     }
 }
