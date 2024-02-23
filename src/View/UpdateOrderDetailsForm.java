@@ -1,5 +1,6 @@
 package View;
 
+import controller.OrderController;
 import model.Order;
 
 import javax.swing.*;
@@ -83,26 +84,39 @@ public class UpdateOrderDetailsForm extends JFrame {
         txtOrderId.setBounds(140,150, 95,20);
         txtOrderId.setBackground(Color.WHITE);
         txtOrderId.setBorder(null);
+        txtOrderId.addActionListener(e -> {
+
+            String userInput = txtOrderId.getText();
+            Order order = OrderController.searchOrder(userInput);
+            if (order != null) {
+                // Order found. You can now use the order object.
+            } else {
+                // Order not found. Handle this case.
+            }
+        });
 
         txtCustIdValue = new JTextField();
         txtCustIdValue.setEditable(false);
-        txtCustIdValue.setBounds(180,180, 100,20);
+        txtCustIdValue.setBounds(160,180, 100,20);
         txtCustIdValue.setBackground(Color.WHITE);
         txtCustIdValue.setBorder(null);
 
         txtNameValue = new JTextField();
         txtNameValue.setEditable(false);
-        txtNameValue.setBounds(120,180, 100,20);
+        txtNameValue.setBounds(120,210, 120,20);
+        txtNameValue.setBackground(Color.WHITE);
         txtNameValue.setBorder(null);
 
         txtQtyValue = new JTextField();
-        txtQtyValue.setEditable(false);
-        txtQtyValue.setBounds(120,210, 100,20);
+        txtQtyValue.setEditable(true);
+        txtQtyValue.setBounds(150,240, 100,20);
+        txtQtyValue.setBackground(Color.WHITE);
         txtQtyValue.setBorder(null);
 
         txtTotValue = new JTextField();
         txtTotValue.setEditable(false);
-        txtTotValue.setBounds(120,240, 100,20);
+        txtTotValue.setBounds(100,270, 100,20);
+        txtTotValue.setBackground(Color.WHITE);
         txtTotValue.setBorder(null);
 
         String[]orderStatuses = {"Deiliverd","Canceled","Pending"};
@@ -110,10 +124,6 @@ public class UpdateOrderDetailsForm extends JFrame {
         JComboBox<String>status = new JComboBox<>(orderStatuses);
         status.setBounds(170,90,160,25);
 
-//        txtStatusValue = new JTextField();
-//        txtStatusValue.setEditable(false);
-//        txtStatusValue.setBounds(160,270, 100,20);
-//        txtStatusValue.setBorder(null);
 
         btnUpdate = new JButton("Search");
         btnUpdate.setFont(lblFont);
@@ -157,6 +167,9 @@ public class UpdateOrderDetailsForm extends JFrame {
 
         add(txtOrderId);
         add(txtCustIdValue);
+        add(txtNameValue);
+        add(txtQtyValue);
+        add(txtTotValue);
 
     }
 }
