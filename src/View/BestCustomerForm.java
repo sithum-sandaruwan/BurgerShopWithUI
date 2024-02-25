@@ -1,5 +1,8 @@
 package View;
 
+import controller.OrderController;
+import model.Order;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -12,7 +15,7 @@ public class BestCustomerForm extends JFrame {
 
     private DefaultTableModel dtm;
 
-    BestCustomerForm(){
+    public BestCustomerForm(){
         setTitle("Burger Shop");
         setSize(800,600);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -43,6 +46,19 @@ public class BestCustomerForm extends JFrame {
         loadTable();
     }
     private void loadTable(){
+        Order[] customers = OrderController.toArray();
 
+        dtm.setRowCount(0);
+
+        for (int i = 0; i < customers.length; i++) {
+            Order obj = customers[i];
+
+            Object[] rowdata ={
+                    obj.getCustomerID(),
+                    obj.getCustomerName(),
+                    obj.getTotalValue()
+            };
+            dtm.addRow(rowdata);
+        }
     }
 }

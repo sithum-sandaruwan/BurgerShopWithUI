@@ -128,7 +128,7 @@ public class SearchOrderForm extends JFrame {
         btnBack.setBorderPainted(true);
         btnBack.setFocusable(false);
         btnBack.addActionListener(evt -> {
-
+            new Search().setVisible(true);
         });
 
 

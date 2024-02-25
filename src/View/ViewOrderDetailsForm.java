@@ -30,6 +30,7 @@ public class ViewOrderDetailsForm extends JFrame {
         lblTitle.setBackground(Color.RED);
         lblTitle.setOpaque(true);
 
+
         String [] columnNames = {"Order ID","Customer Id","Customer Name","Order Status","QTY","Total"};
 
         dtm = new DefaultTableModel(columnNames,0);
@@ -41,25 +42,25 @@ public class ViewOrderDetailsForm extends JFrame {
         add(paneTbl);
         add(lblTitle);
 
-       // loadTable();
+        loadTable();
     }
-//    private void loadTable(){
-//        Order [] ordersArr = OrderController.toArray();
-//
-//        dtm.setRowCount(0);
-//
-//        for (int i = 0; i < ordersArr.length; i++) {
-//            Order obj = ordersArr[i];
-//            Object[] rowdata ={
-//              obj.getOrderID(),
-//              obj.getCustomerID(),
-//              obj.getCustomerName(),
-//              obj.getOrderStatus(),
-//              obj.getQuantity(),
-//              obj.getTotalValue()
-//            };
-//            dtm.addRow(rowdata);
-//        }
-//
-//    }
+    private void loadTable(){
+        Order [] ordersArr = OrderController.toArray();
+
+        dtm.setRowCount(0);
+
+        for (int i = 0; i < ordersArr.length; i++) {
+            Order obj = ordersArr[i];
+            Object[] rowdata ={
+              obj.getOrderID(),
+              obj.getCustomerID(),
+              obj.getCustomerName(),
+              obj.getOrderStatus(),
+              obj.getQuantity(),
+              obj.getTotalValue()
+            };
+            dtm.addRow(rowdata);
+        }
+
+    }
 }

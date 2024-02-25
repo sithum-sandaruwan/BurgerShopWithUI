@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 public class AddOrder extends JFrame {
+
     private JLabel lblHome;
     private JLabel lblOrderId;
     private JLabel lblCustomerId;
@@ -21,6 +22,7 @@ public class AddOrder extends JFrame {
     private JButton PlaceOrderBtn;
     private JButton AddCustomerBtn;
     private JButton AddTotalBtn;
+    private final JButton btnBack;
 
     private JTextField txtOrderId;
     private JTextField txtName;
@@ -139,6 +141,17 @@ public class AddOrder extends JFrame {
             setNextId();
         });
 
+        btnBack = new JButton("Back");
+        btnBack.setFont(lblFont);
+        btnBack.setBackground(Color.GRAY);
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setBounds(400,220,100,25);
+        btnBack.setBorderPainted(true);
+        btnBack.setFocusable(false);
+        btnBack.addActionListener(evt -> {
+            new HomePageForm().setVisible(true);
+        });
+
         add(lblCustomerName);
         add(lblCustomerId);
         add(lblOrderId);
@@ -154,6 +167,7 @@ public class AddOrder extends JFrame {
 
         add(PlaceOrderBtn);
         add(AddTotalBtn);
+        add(btnBack);
     }
 
     private void clearTxt(){

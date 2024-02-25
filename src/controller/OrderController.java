@@ -8,6 +8,8 @@ public class OrderController {
     public static controller.OrderController OrderController;
     public static final double BURGERPRICE = 500;
 
+    private static controller.OrderController list;
+
     public static String generateCustomerID() {
         return "C" + String.format("%03d", DBConnection.getInstance().getOrderList().size() + 1);
     }
@@ -83,6 +85,9 @@ public class OrderController {
         return true;
     }
 
+    public static Order[] toArray() {
+        return list.toArray();
+    }
 
 
 //    public static Order[] toArray() {

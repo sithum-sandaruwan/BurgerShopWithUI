@@ -100,7 +100,7 @@ public class SearchCustForm extends JFrame {
         btnBack.setBorderPainted(true);
         btnBack.setFocusable(false);
         btnBack.addActionListener(evt -> {
-
+            new Search().setVisible(true);
         });
 
         dtm = new DefaultTableModel(columns,0);

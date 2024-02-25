@@ -54,7 +54,7 @@ public class Search extends JFrame {
         btnSearchOrder.setFocusable(false);
         btnSearchOrder.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         btnSearchOrder.addActionListener(evt -> {
-            //new SearchOrderFrom().setVisible(true);
+            new SearchOrderForm().setVisible(true);
         });
 
 
