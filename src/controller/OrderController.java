@@ -6,9 +6,11 @@ import model.OrderList;
 
 public class OrderController {
     public static controller.OrderController OrderController;
+
+
     public static final double BURGERPRICE = 500;
 
-    private static controller.OrderController list;
+    private static controller.OrderController list2=new OrderController();
 
     public static String generateCustomerID() {
         return "C" + String.format("%03d", DBConnection.getInstance().getOrderList().size() + 1);
@@ -86,7 +88,7 @@ public class OrderController {
     }
 
     public static Order[] toArray() {
-        return list.toArray();
+        return DBConnection.getInstance().getOrderList().toArray();
     }
 
 

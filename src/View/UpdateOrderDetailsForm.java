@@ -2,26 +2,27 @@ package View;
 
 import controller.OrderController;
 import model.Order;
+import model.OrderList;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class UpdateOrderDetailsForm extends JFrame {
 
-    private final JLabel lblTitle;
-    private final JLabel lblOrderId;
-    private final JLabel lblCustomerId;
-    private final JLabel lblName;
-    private final JLabel lblQty;
-    private final JLabel lblTotal;
-    private final JLabel lblOrderStatus;
-    private final JTextField txtOrderId;
-    private final JTextField txtCustIdValue;
-    private final JTextField txtNameValue;
-    private final JTextField txtQtyValue;
-    private final JTextField txtTotValue;
-    private final JButton btnUpdate;
-    private final JButton btnBack;
+    private JLabel lblTitle;
+    private JLabel lblOrderId;
+    private JLabel lblCustomerId;
+    private JLabel lblName;
+    private JLabel lblQty;
+    private JLabel lblTotal;
+    private JLabel lblOrderStatus;
+    private JTextField txtOrderId;
+    private JTextField txtCustIdValue;
+    private JTextField txtNameValue;
+    private JTextField txtQtyValue;
+    private JTextField txtTotValue;
+    private JButton btnUpdate;
+    private JButton btnBack;
 
     public UpdateOrderDetailsForm(){
         setTitle("Burger Shop");
@@ -88,17 +89,21 @@ public class UpdateOrderDetailsForm extends JFrame {
 
             String userInput = txtOrderId.getText();
             Order order = OrderController.searchOrder(userInput);
+
             if (order != null) {
-                // Order found. You can now use the order object.
+                txtCustIdValue.setText(order.getCustomerID());
+                txtNameValue.setText(order.getCustomerName());
+                txtQtyValue.setText(String.valueOf(order.getQuantity()));
+                txtTotValue.setText(order.getCustomerID());
             } else {
-                // Order not found. Handle this case.
+
             }
         });
 
         txtCustIdValue = new JTextField();
         txtCustIdValue.setEditable(false);
         txtCustIdValue.setBounds(160,180, 100,20);
-        txtCustIdValue.setBackground(Color.WHITE);
+        //txtCustIdValue.setBackground(Color.WHITE);
         txtCustIdValue.setBorder(null);
 
         txtNameValue = new JTextField();
@@ -119,10 +124,23 @@ public class UpdateOrderDetailsForm extends JFrame {
         txtTotValue.setBackground(Color.WHITE);
         txtTotValue.setBorder(null);
 
-        String[]orderStatuses = {"Deiliverd","Canceled","Pending"};
+        //String[]orderStatuses = {"Deiliverd","Canceled","Pending"};
 
-        JComboBox<String>status = new JComboBox<>(orderStatuses);
-        status.setBounds(170,90,160,25);
+        JComboBox<String> status = new JComboBox<>();
+        status.setBounds(170, 90, 160, 25);
+
+        status.addItem("Pending");
+        status.addItem("Processing");
+        status.addItem("Delivered");
+
+        try {
+            int orderId = Integer.parseInt(txtOrderId.getText());
+            status.setSelectedIndex(orderId);
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid order ID: " + txtOrderId.getText());
+        }
+
+
 
 
         btnUpdate = new JButton("Search");

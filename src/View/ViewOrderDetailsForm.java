@@ -38,14 +38,16 @@ public class ViewOrderDetailsForm extends JFrame {
 
         JScrollPane paneTbl = new JScrollPane(TableOrders);
         paneTbl.setBounds(70,80,650,400);
+        loadTable();
 
         add(paneTbl);
         add(lblTitle);
 
-        loadTable();
+
     }
     private void loadTable(){
         Order [] ordersArr = OrderController.toArray();
+        System.out.println(ordersArr.length);
 
         dtm.setRowCount(0);
 
