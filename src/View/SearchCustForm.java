@@ -1,6 +1,8 @@
 package View;
 
+import controller.OrderController;
 import model.Order;
+import model.OrderList;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -18,6 +20,7 @@ public class SearchCustForm extends JFrame {
     private final JTable TableOrder;
     private final JButton SearchBtn;
     private final JButton btnBack;
+    private  String custId;
 
     private String [] columns = {"Order ID","Order Qty","Total"};
 
@@ -73,6 +76,7 @@ public class SearchCustForm extends JFrame {
         txtName.setBounds(130,130, 100,20);
         txtName.setBorder(null);
 
+
         SearchBtn = new JButton("Search");
         SearchBtn.setFont(lblFont);
         SearchBtn.setBackground(Color.RED);
@@ -82,14 +86,9 @@ public class SearchCustForm extends JFrame {
         SearchBtn.setFocusable(false);
         SearchBtn.addActionListener(evt -> {
 
-
-            Order orderObj = new Order();
-            // txtOrderId.getText(),
-            // txtCustomerId.getText(),
-            // txtName.getText(),
-            // 1,
-            // Integer.parseInt(txtQty.getText()),
-            // qty
+             custId = txtCustId.getText();
+            System.out.println(custId);
+            txtName.setText(String.valueOf(OrderController.searchCustomer(custId)));
         });
 
         btnBack = new JButton("Back");
@@ -122,25 +121,22 @@ public class SearchCustForm extends JFrame {
 
         add(paneTbl);
 
-       // loadTable();
+        loadTable();
     }
-  //  private void loadTable(){
-//        Order [] ordersArr = OrderController.toArray();
-//
-//        dtm.setRowCount(0);
-//
-//        for (int i = 0; i < ordersArr.length; i++) {
-//            Order obj = ordersArr[i];
-//            Object[] rowdata ={
-//              obj.getOrderID(),
-//              obj.getCustomerID(),
-//              obj.getCustomerName(),
-//              obj.getOrderStatus(),
-//              obj.getQuantity(),
-//              obj.getTotalValue()
-//            };
-//            dtm.addRow(rowdata);
-//        }
-//
-//    }
+    private void loadTable(){
+        Order [] ordersArr = OrderController.toArray();
+
+        dtm.setRowCount(0);
+
+        for (int i = 0; i < ordersArr.length; i++) {
+            Order obj = ordersArr[i];
+            Object[] rowdata ={
+              obj.getOrderID(),
+              obj.getQuantity(),
+              obj.getTotalValue()
+            };
+            dtm.addRow(rowdata);
+        }
+
+    }
 }

@@ -5,10 +5,12 @@ public class Order {
     private String customerName;
     private String orderID;
     private int qty;
-    private int totalValue;
+    private int totalValue = (int) (BURGERPRICE*qty);
     private int orderStatus;
 
     private static final double BURGERPRICE = 500;
+
+    private static String [] status = {"Pending","Deliverd","Cancelled"};
 
     public Order() {}
 
@@ -17,7 +19,7 @@ public class Order {
         this.customerName = customerName;
         this.orderID = orderID;
         this.qty = qty;
-        this.totalValue = (int) BURGERPRICE*qty;
+        this.totalValue = totalValue;
         this.orderStatus = orderStatus;
     }
 
@@ -66,4 +68,15 @@ public class Order {
         return totalPurchases;
     }
 
+//    public String strOrderStatus(int orderStatus){
+//        if (orderStatus == 1) {
+//            return "Pending";
+//        } else if (orderStatus == 2) {
+//            return "Delivered";
+//        } else if (orderStatus == 3) {
+//            return "Cancelled";
+//        } else {
+//            return null;
+//        }
+//    }
 }

@@ -26,21 +26,21 @@ public class OrderController {
         return true;
     }
 
-//    public static Order[] getBestCustomer() {
-//        OrderList orderList = DBConnection.getInstance().getOrderList();
-//        Order[] orderArray = orderList.toArray();
-//
-//        for(int i = 1; i < orderArray.length; i++) {
-//            for(int j = 0; j < orderArray.length - i; j++) {
-//                if(orderArray[j].calculateTotalPurchases() > orderArray[j + 1].calculateTotalPurchases()) {
-//                    Order tempOrder = orderArray[j];
-//                    orderArray[j] = orderArray[j + 1];
-//                    orderArray[j + 1] = tempOrder;
-//                }
-//            }
-//        }
-//        return orderArray;
-//    }
+    public static Order[] getBestCustomer() {
+        OrderList orderList = DBConnection.getInstance().getOrderList();
+        Order[] orderArray = orderList.toArray();
+
+
+            for(int j = 0; j < orderArray.length ; j++) {
+                if(orderArray[j].calculateTotalPurchases(orderList) > orderArray[j + 1].calculateTotalPurchases(orderList)) {
+                    Order tempOrder = orderArray[j];
+                    orderArray[j] = orderArray[j + 1];
+                    orderArray[j + 1] = tempOrder;
+                }
+            }
+
+        return orderArray;
+    }
 
 //    public static Order getBestCustomer() {
 //        OrderList orderList = DBConnection.getInstance().getOrderList();
