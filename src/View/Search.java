@@ -37,7 +37,7 @@ public class Search extends JFrame {
         btnSearchBestCust.setFont(btnFont);
         btnSearchBestCust.setBackground(Color.RED);
         btnSearchBestCust.setForeground(Color.WHITE);
-        btnSearchBestCust.setBounds(200,100,200,25);
+        btnSearchBestCust.setBounds(200,100,250,25);
         btnSearchBestCust.setBorderPainted(true);
         btnSearchBestCust.setFocusable(false);
         btnSearchBestCust.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -49,7 +49,7 @@ public class Search extends JFrame {
         btnSearchOrder.setFont(btnFont);
         btnSearchOrder.setBackground(Color.RED);
         btnSearchOrder.setForeground(Color.WHITE);
-        btnSearchOrder.setBounds(200,150,200,25);
+        btnSearchOrder.setBounds(200,150,250,25);
         btnSearchOrder.setBorderPainted(true);
         btnSearchOrder.setFocusable(false);
         btnSearchOrder.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -62,7 +62,7 @@ public class Search extends JFrame {
         btnSearchCust.setFont(btnFont);
         btnSearchCust.setBackground(Color.RED);
         btnSearchCust.setForeground(Color.WHITE);
-        btnSearchCust.setBounds(200,200,200,25);
+        btnSearchCust.setBounds(200,200,250,25);
         btnSearchCust.setBorderPainted(true);
         btnSearchCust.setFocusable(false);
         btnSearchOrder.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

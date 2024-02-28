@@ -2,6 +2,7 @@ package View;
 
 import controller.OrderController;
 import model.Order;
+import model.OrderList;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -46,12 +47,16 @@ public class BestCustomerForm extends JFrame {
         loadTable();
     }
     private void loadTable(){
-        Order[] customers = OrderController.toArray();
+        Order[] customers = OrderController.getBestCustomer();
 
         dtm.setRowCount(0);
 
         for (int i = 0; i < customers.length; i++) {
             Order obj = customers[i];
+
+            System.out.println("customer Id:"+obj.getCustomerID());
+            System.out.println("customer Name:"+obj.getCustomerName());
+            System.out.println("Total Value:"+obj.getTotalValue());
 
             Object[] rowdata ={
                     obj.getCustomerID(),

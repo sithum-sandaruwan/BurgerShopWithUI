@@ -30,14 +30,16 @@ public class OrderController {
         OrderList orderList = DBConnection.getInstance().getOrderList();
         Order[] orderArray = orderList.toArray();
 
-
-            for(int j = 0; j < orderArray.length ; j++) {
-                if(orderArray[j].calculateTotalPurchases(orderList) > orderArray[j + 1].calculateTotalPurchases(orderList)) {
+        for (int i = 0; i < orderArray.length-1; i++) {
+            for(int j = i+1; j < orderArray.length; j++) {
+                if(orderArray[i].calculateTotalPurchases(orderList) > orderArray[j + 1].calculateTotalPurchases(orderList)) {
                     Order tempOrder = orderArray[j];
                     orderArray[j] = orderArray[j + 1];
                     orderArray[j + 1] = tempOrder;
                 }
             }
+        }
+
 
         return orderArray;
     }

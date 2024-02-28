@@ -86,9 +86,11 @@ public class SearchCustForm extends JFrame {
         SearchBtn.setFocusable(false);
         SearchBtn.addActionListener(evt -> {
 
-             custId = txtCustId.getText();
+            custId = txtCustId.getText();
             System.out.println(custId);
+
             txtName.setText(String.valueOf(OrderController.searchCustomer(custId)));
+            loadTable();
         });
 
         btnBack = new JButton("Back");
@@ -121,7 +123,7 @@ public class SearchCustForm extends JFrame {
 
         add(paneTbl);
 
-        loadTable();
+
     }
     private void loadTable(){
         Order [] ordersArr = OrderController.toArray();

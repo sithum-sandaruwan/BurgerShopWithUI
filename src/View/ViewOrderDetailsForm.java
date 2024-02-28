@@ -31,7 +31,7 @@ public class ViewOrderDetailsForm extends JFrame {
         lblTitle.setOpaque(true);
 
 
-        String [] columnNames = {"Customer Name","Order Id","Customer Id","Total","Order Status","Total"};
+        String [] columnNames = {"Order Id","Customer Id","Name","Total","Order Status","Qty"};
 
         dtm = new DefaultTableModel(columnNames,0);
         TableOrders = new JTable(dtm);

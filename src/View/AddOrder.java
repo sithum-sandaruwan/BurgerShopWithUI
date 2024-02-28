@@ -127,9 +127,9 @@ public class AddOrder extends JFrame {
             System.out.println("Order Placed");
 
             Order orderObj = new Order(
-                    txtOrderId.getText(),
                     txtCustomerId.getText(),
                     txtName.getText(),
+                    txtOrderId.getText(),
                     1,
                     Integer.parseInt(txtQty.getText()),
                     qty
