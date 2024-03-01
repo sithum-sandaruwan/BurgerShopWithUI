@@ -2,102 +2,94 @@ package View;
 
 import controller.OrderController;
 import model.Order;
-import model.OrderList;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class SearchCustForm extends JFrame {
+    private final JLabel lblTitle = new JLabel();
+    private final JLabel lblSubTitle = new JLabel();
+    private final JLabel lblCustomerID = new JLabel();
+    private final JLabel lblCustomerName = new JLabel();
 
-    private final JLabel lblTitle;
-    private final JLabel lblTitle2;
-    private final JLabel lblCustomerId;
-    private final JLabel lblName;
-    private final JTextField txtCustId;
-    private final JTextField txtName;
+    private final JTextField txtCustomerID = new JTextField();
+    private final JTextField txtCustomerName = new JTextField();
+
+    private final JTable tableOrder;
+
     private final DefaultTableModel dtm;
-    private final JTable TableOrder;
-    private final JButton SearchBtn;
+
+    private final JButton btnSearch;
     private final JButton btnBack;
-    private  String custId;
 
-    private String [] columns = {"Order ID","Order Qty","Total"};
+    private  String customerID;
 
-    public SearchCustForm(){
-        setTitle("Burger Shop");
+    private String[] columns = {"Order ID","Burger QTY"," Net Total","Order Status"};
+
+    public SearchCustForm() {
+        setTitle("Search Customer Details Form");
         setSize(800,600);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
 
-        Font lblFont =new Font("Time New Roman",Font.PLAIN,15);
+        Font lblFont = new Font("Arial",Font.BOLD,13);
 
-        lblTitle = new JLabel();
-        lblTitle .setText("Search Customer");
-        lblTitle.setFont(new Font("Time New Roman",Font.BOLD,30));
+        lblTitle.setText("Search Customer Details");
+        lblTitle.setFont(new Font("Arial",Font.BOLD,25));
         lblTitle.setForeground(Color.WHITE);
+        lblTitle.setBackground(Color.RED);
         lblTitle.setBounds(0,0,800,50);
         lblTitle.setHorizontalAlignment(JLabel.CENTER);
         lblTitle.setVerticalAlignment(JLabel.CENTER);
-        lblTitle.setBackground(Color.RED);
         lblTitle.setOpaque(true);
 
-        lblTitle2 = new JLabel();
-        lblTitle2 .setText("Order Details");
-        lblTitle2.setFont(new Font("Time New Roman",Font.BOLD,20));
-        lblTitle2.setForeground(Color.WHITE);
-        lblTitle2.setBounds(0,230,800,40);
-        lblTitle2.setHorizontalAlignment(JLabel.CENTER);
-        lblTitle2.setVerticalAlignment(JLabel.CENTER);
-        lblTitle2.setBackground(Color.RED);
-        lblTitle2.setOpaque(true);
+        lblSubTitle.setText("Customer's Order Details");
+        lblSubTitle.setFont(new Font("Arial",Font.BOLD,25));
+        lblSubTitle.setForeground(Color.WHITE);
+        lblSubTitle.setBackground(Color.RED);
+        lblSubTitle.setBounds(0,220,800,50);
+        lblSubTitle.setHorizontalAlignment(JLabel.CENTER);
+        lblSubTitle.setVerticalAlignment(JLabel.CENTER);
+        lblSubTitle.setOpaque(true);
 
-        lblCustomerId = new JLabel();
-        lblCustomerId .setText("Enter Customer Id: ");
-        lblCustomerId.setFont(lblFont);
-        lblCustomerId.setForeground(Color.BLACK);
-        lblCustomerId.setBounds(30,95,170,20);
+        lblCustomerID.setText("Enter Customer ID");
+        lblCustomerID.setFont(lblFont);
+        lblCustomerID.setBounds(30,95,120,25);
 
-        lblName = new JLabel();
-        lblName .setText("Name : ");
-        lblName.setFont(lblFont);
-        lblName.setForeground(Color.BLACK);
-        lblName.setBounds(30,130,100,20);
+        lblCustomerName .setText("Name");
+        lblCustomerName.setFont(lblFont);
+        lblCustomerName.setBounds(30,130,120,25);
 
-        txtCustId = new JTextField();
-        txtCustId.setEditable(true);
-        txtCustId.setBounds(200,95, 100,20);
-        txtCustId.setBackground(Color.WHITE);
-        txtCustId.setBorder(null);
+        txtCustomerID.setEditable(true);
+        txtCustomerID.setBounds(160,95,120,25);
+        txtCustomerID.setBorder(null);
 
-        txtName = new JTextField();
-        txtName.setEditable(false);
-        txtName.setBounds(130,130, 100,20);
-        txtName.setBorder(null);
+        txtCustomerName.setEditable(false);
+        txtCustomerName.setBounds(160,130,120,25);
+        txtCustomerName.setBorder(null);
 
+        btnSearch = new JButton("Search");
+        btnSearch.setFont(lblFont);
+        btnSearch.setForeground(Color.WHITE);
+        btnSearch.setBackground(Color.RED);
+        btnSearch.setBounds(400,170,120,25);
+        btnSearch.setBorderPainted(true);
+        btnSearch.setFocusable(false);
+        btnSearch.addActionListener(evt -> {
+            customerID = txtCustomerID.getText();
+            System.out.println(customerID);
+            txtCustomerName.setText(String.valueOf(OrderController.searchCustomer(customerID)));
 
-        SearchBtn = new JButton("Search");
-        SearchBtn.setFont(lblFont);
-        SearchBtn.setBackground(Color.RED);
-        SearchBtn.setForeground(Color.WHITE);
-        SearchBtn.setBounds(540,190,100,25);
-        SearchBtn.setBorderPainted(true);
-        SearchBtn.setFocusable(false);
-        SearchBtn.addActionListener(evt -> {
-
-            custId = txtCustId.getText();
-            System.out.println(custId);
-
-            txtName.setText(String.valueOf(OrderController.searchCustomer(custId)));
             loadTable();
         });
 
         btnBack = new JButton("Back");
         btnBack.setFont(lblFont);
-        btnBack.setBackground(Color.GRAY);
         btnBack.setForeground(Color.WHITE);
-        btnBack.setBounds(390,190,100,25);
+        btnBack.setBackground(Color.GRAY);
+        btnBack.setBounds(550,170,120,25);
         btnBack.setBorderPainted(true);
         btnBack.setFocusable(false);
         btnBack.addActionListener(evt -> {
@@ -105,40 +97,40 @@ public class SearchCustForm extends JFrame {
         });
 
         dtm = new DefaultTableModel(columns,0);
-        TableOrder = new JTable(dtm);
+        tableOrder = new JTable(dtm);
 
-        JScrollPane paneTbl = new JScrollPane(TableOrder);
+        JScrollPane paneTbl = new JScrollPane(tableOrder);
         paneTbl.setBounds(70,300,650,400);
 
         add(lblTitle);
-        add(lblTitle2);
-        add(lblName);
-        add(lblCustomerId);
+        add(lblSubTitle);
+        add(lblCustomerName);
+        add(lblCustomerID);
 
-        add(txtCustId);
-        add(txtName);
+        add(txtCustomerID);
+        add(txtCustomerName);
 
+        add(btnSearch);
         add(btnBack);
-        add(SearchBtn);
 
         add(paneTbl);
-
-
     }
-    private void loadTable(){
-        Order [] ordersArr = OrderController.toArray();
+
+    private void loadTable() {
+        Order[] ordersArr = OrderController.toArray();
 
         dtm.setRowCount(0);
 
-        for (int i = 0; i < ordersArr.length; i++) {
+        for(int i = 0; i < ordersArr.length; i++) {
             Order obj = ordersArr[i];
-            Object[] rowdata ={
-              obj.getOrderID(),
-              obj.getQuantity(),
-              obj.getTotalValue()
-            };
-            dtm.addRow(rowdata);
-        }
 
+            Object[] rowData = {
+                    obj.getOrderID(),
+                    obj.getTotalValue(),
+                    obj.getOrderStatus(),
+                    obj.getQuantity()
+            };
+            dtm.addRow(rowData);
+        }
     }
 }
